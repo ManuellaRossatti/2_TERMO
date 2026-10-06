@@ -151,7 +151,87 @@ FROM produto
 ORDER BY nome
 LIMIT 8 OFFSET 8;
 
-EX 13: COLUNAS COM CÀLCULOS
+-- EX 13: COLUNAS COM CÀLCULOS
 SELECT id_item, quantidade, preco_unitario, quantidade * preco_unitario AS valor_total
 FROM item_pedido;
 
+-- EX 14: FUNÇÕES Uteis em consultas
+SELECT UPPER(NOME) AS NOME_MAIUSCULO,
+    LOWER(NOME) AS EMAIL_MINUSCULO,
+FROM CLIENTE;
+-- deixar em maiusculo ou minusculo
+
+SELECT CONCAT(NOME, ' - ', CIDADE) AS NOME_CIDADE
+FROM CLIENTE;   
+-- JUntar informações entre campos
+
+SELECT nome, preco, ROUND(preco * 0.90, 2) AS PRECO_DESCONTO
+FROM produto;
+-- arredondar valores com casas decimais
+
+SELECT id_pedido, data_pedido, DATE_FORMAT(data_pedido, '%d/%m/%Y') AS DATA_FORMATADA
+FROM pedido;
+-- formatação de resultados por data mes e ano
+
+-- SUBSTITUINDO NULL Para texto desejado
+SELECT nome,
+COALESCE(telefone, 'Não informado') AS TELEFONE
+FROM cliente;
+
+-- funçoes de agregações 
+-- ex 15: funções de agregação calculos agregadas
+-- COUNT - CONTAR REGISTROS
+-- SUM - SOMA DE VALORES
+-- AVG - MEDIA DE VALORES
+-- MIN - MENOR VALOR
+-- MAX - MAIOR VALOR
+SELECT COUNT(*) AS TOTAL_CLIENTES
+FROM CLIENTE;
+-- QUANTOS CLIENTES TEMOS EM NOSSA TABELA CLIENTE?
+
+
+SELECT AVG(PRECO) AS PRECO_MEDIO
+FROM PRODUTO; 
+-- CALCULE O O PREÇO MÈDIO DOS PRODUTOS
+
+SELECT MIN(PRECO) AS MENORES_PRECO,
+    MAX(PRECO) AS MAIOR_PRECO,
+    AVG(PRECO) AS MEDIA_PRECO
+FROM PRODUTO;
+-- RESUMO DE PREÇOS - MENOR, MAIOR E MÉDIA
+
+SELECT SUM(VALOR_TOTAL) AS FATURAMENTO
+FROM PEDIDO;
+WHERE status = 'FINALIZADO';
+-- total de faturamento dos pedidos finalizados
+
+-- EX 16: GROUP BY - AGRUPANDO REGISTROS (dados)
+SELECT CIDADE, COUNT(*) AS TOTAL_CLIENTES
+FROM CLIENTE
+GROUP BY CIDADE;
+
+-- EX 17: HAVING - FILTRANDO REGISTROS AGRUPADOS grupos
+-- WHERE - FILTRA REGISTROS ANTES DE AGRUPAR
+-- HAVING - FILTRA REGISTROS DEPOIS DE AGRUPAR  
+
+SELECT CIDADE, COUNT(*) AS TOTAL_CLIENTES
+FROM CLIENTE      
+gROUP BY CIDADE
+HAVING COUNT(*) > 2;
+-- cidades com mais de 2 clientes cadastrados
+
+-- EX 18: REsumo e ordem de3 uma consulta completa
+SELECT colunas
+FROM tabela
+WHERE condicao
+GROUP BY colunas_agrupar
+HAVING condicao_agrupar
+ORDER BY colunas_ordenar
+LIMIT quantidade OFFSET pular_registros;
+
+SELECT cidade
+FROM cliente
+WHERE cidade = 'Limeira'
+GROUP BY cidade
+HAVING COUNT(*) > 3
+LIMIT 5 OFFSET 0;
