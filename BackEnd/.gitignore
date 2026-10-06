@@ -1,0 +1,47 @@
+# Dependências do Node
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ambiente e segredos
+.env
+.env.*
+!.env.example
+
+# Cobertura e testes
+coverage/
+.nyc_output/
+
+# Build e artefatos
+dist/
+build/
+out/
+.cache/
+
+# Configurações locais de editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.orig
+texto_para_gerar_readme.txt
+
+# Arquivos de lock do pacote (mantenha estes versionados em projetos npm/yarn)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

@@ -1,0 +1,9 @@
+{
+  "name": "avaliacao-pbe1-gabarito",
+  "version": "1.0.0",
+  "description": "Gabarito esperado da avaliação somativa de Programação Backend",
+  "main": "ex01_producao.js",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
