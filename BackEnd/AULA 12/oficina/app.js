@@ -1,4 +1,4 @@
-const entrada = require('readline-sync');
+/* const entrada = require('readline-sync');
 
 // Importando o nosso módulo (caixa de ferramentas)
 const oficina = require('./funcoesOficina');
@@ -25,4 +25,4 @@ console.log(`Orcamento Bruto: R$ ${totalBruto.toFixed(2)}`);
 console.log(`DESCONTO (5%):   R$ ${(totalBruto - totalComDesconto).toFixed(2)}`);
 console.log(`TOTAL A PAGAR:   R$ ${totalComDesconto.toFixed(2)}`);
 console.log(`Status:          ${statusGarantia}`);
-console.log("----------------------------");
+console.log("----------------------------"); */
