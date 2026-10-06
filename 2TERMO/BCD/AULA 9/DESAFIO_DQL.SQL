@@ -1,28 +1,28 @@
 -- Active: 1791283836970@@127.0.0.1@3308@smartcoffee_dml_manu
 
-AULA_09_-_DQL_CONSULTAS_ATIVIDADE_SQL.sql
-100%
+-- AULA_09_-_DQL_CONSULTAS_ATIVIDADE_SQL.sql
+
 -- ============================================================
 -- AULA 09 - ATIVIDADE PRÁTICA DE DQL
 -- Nome: _______________________________________________
 -- Turma: ______________________ Data: _________________
 -- Base: smartcoffee_dql
 -- ============================================================
-USE smartcoffee_dql;
+USE smartcoffee_dml_manu;
 
 -- PARTE A - AQUECIMENTO
 
 -- 1. Liste todos os clientes cadastrados.
 SELECT nome
-FROM clientes;
+FROM cliente;
 
 -- 2. Exiba apenas nome, cidade e e-mail dos clientes.
 SELECT nome, cidade, email 
-FROM clientes;
+FROM cliente;
 
 -- 3. Liste os nomes das cidades sem repetir valores.
 SELECT DISTINCT cidade 
-FROM clientes;
+FROM cliente;
 
 -- 4. Liste todos os produtos em ordem crescente de preço.
 SELECT nome, preco
