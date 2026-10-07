@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>LR Oficina da Beleza</title>
+    <link rel="stylesheet" href="link.css">
+</head>
+<body>
+    <header>
+        <div class="bar">
+            <a class="logo" href="#home">LR <b>Oficina da Beleza</b> ✂️</a>
+            <nav>
+                <a href="#home" data-p="home">Home</a>
+                <a href="#loja" data-p="loja">Loja</a>
+                <a href="#servicos" data-p="servicos">Serviços</a>
+                <a href="#profissionais" data-p="profissionais">Profissionais</a>
+                <a href="#agendamento" data-p="agendamento">Agendamento</a>
+                <a href="#sobre" data-p="sobre">Sobre / Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME -->
+        <div class="page" id="home">
+            <div class="hero top">
+                <h1>LR Oficina da Beleza</h1>
+                <p>Cabelo, unhas, maquiagem e uma boutique cheia de estilo. Tudo para realçar a sua beleza num só lugar.</p>
+                <a class="btn" href="#agendamento">Agendar horário</a>
+                <div class="finder">
+                    <input id="q" placeholder="Digite seu bairro, cidade ou CEP" onkeydown="if(event.key==='Enter')buscar()">
+                    <button class="btn" onclick="buscar()">Buscar loja</button>
+                    <button class="btn ghost" onclick="geo()">📍 Usar minha localização</button>
+                </div>
+            </div>
+            
+            <div id="res"></div>
+            
+            <section class="blk">
+                <h2>O que oferecemos</h2>
+                <div class="grid">
+                    <a class="card link-card" href="#servicos">
+                        <div class="ic">✂️</div>
+                        <h3>Serviços</h3>
+                        <p>Cabelo, manicure, pedicure, maquiagem e estética.</p>
+                    </a>
+                    <a class="card link-card" href="#loja">
+                        <div class="ic">🛍️</div>
+                        <h3>Boutique</h3>
+                        <p>Roupas, bolsas, acessórios e produtos para cabelo.</p>
+                    </a>
+                    <a class="card link-card" href="#profissionais">
+                        <div class="ic">👩‍🦱</div>
+                        <h3>Profissionais</h3>
+                        <p>Conheça a equipe e veja nosso portfólio.</p>
+                    </a>
+                </div>
+            </section>
+            
+            <section class="blk">
+                <h2>Serviços mais pedidos</h2>
+                <p class="sub">Os queridinhos das nossas clientes.</p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="ic">💇‍♀️</div>
+                        <h3>Corte &amp; Escova</h3>
+                        <p>Visual novo com acabamento de salão.</p>
+                        <div class="price">a partir de R$ 00</div>
+                    </div>
+                    <div class="card">
+                        <div class="ic">💅</div>
+                        <h3>Manicure em Gel</h3>
+                        <p>Unhas perfeitas por mais tempo.</p>
+                        <div class="price">a partir de R$ 180</div>
+                    </div>
+                    <div class="card">
+                        <div class="ic">💄</div>
+                        <h3>Maquiagem Social</h3>
+                        <p>Para festas, formaturas e casamentos.</p>
+                        <div class="price">a partir de R$ 250</div>
+                    </div>
+                    <div class="card">
+                        <div class="ic">🧖‍♀️</div>
+                        <h3>Limpeza de Pele</h3>
+                        <p>Pele renovada e luminosa.</p>
+                        <div class="price">a partir de R$ 150</div>
+                    </div>
+                </div>
+                <p class="mt-18"><a class="btn" href="#servicos">Ver todos os serviços</a></p>
+            </section>
+            
+            <section class="blk">
+                <h2>Novidades na boutique</h2>
+                <p class="sub">Peças e produtos selecionados.</p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="ph">👗</div>
+                        <h3>Vestido</h3>
+                        <div class="price">R$ 00,00</div>
+                    </div>
+                    <div class="card">
+                        <div class="ph">👜</div>
+                        <h3>Bolsa</h3>
+                        <div class="price">R$ 00,00</div>
+                    </div>
+                    <div class="card">
+                        <div class="ph">🧴</div>
+                        <h3>Kit Hidratação</h3>
+                        <div class="price">R$ 00,00</div>
+                    </div>
+                </div>
+                <p class="mt-18"><a class="btn" href="#loja">Ir para a loja</a></p>
+            </section>
+            
+            <section class="blk">
+                <h2>Como funciona</h2>
+                <div class="grid">
+                    <div class="card">
+                        <div class="num">1</div>
+                        <h3>Escolha o serviço</h3>
+                        <p>Veja as opções e valores.</p>
+                    </div>
+                    <div class="card">
+                        <div class="num">2</div>
+                        <h3>Agende o horário</h3>
+                        <p>Dia e hora que couberem na sua rotina.</p>
+                    </div>
+                    <div class="card">
+                        <div class="num">3</div>
+                        <h3>Venha se cuidar</h3>
+                        <p>Chegue e aproveite o momento.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="blk">
+                <h2>Quem já passou por aqui</h2>
+                <div class="grid">
+                    <div class="card">
+                        <p>“Atendimento incrível, saí apaixonada pelo cabelo!”</p>
+                        <div class="price">— Cliente 1 ⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="card">
+                        <p>“Ambiente lindo e profissionais super atenciosas.”</p>
+                        <div class="price">— Cliente 2 ⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="card">
+                        <p>“Achei tudo no mesmo lugar: unha, roupa e produtos.”</p>
+                        <div class="price">— Cliente 3 ⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="blk">
+                <div class="hero inline-hero">
+                    <h2>Pronta para se transformar?</h2>
+                    <p>Reserve seu horário em poucos cliques.</p>
+                    <a class="btn" href="#agendamento">Agendar agora</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- LOJA -->
+        <div class="page" id="loja">
+            <h2>Loja / Boutique 🛍️</h2>
+            <p class="sub">Escolha uma categoria.</p>
+        </div>
+    </main>
+</body>
+</html>
+

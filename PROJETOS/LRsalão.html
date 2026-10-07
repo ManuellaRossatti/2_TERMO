@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LR Oficina da Beleza</title>
+<style>
+:root{--bg:#2b0b11;--card:#3a1119;--tx:#F7F2EA;--mut:#D9C7B8;--ac:#A33B45;--at:#e8939b;--ln:#5E1622;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:80px;scroll-behavior:smooth}
+body{overflow-x:hidden;background:var(--bg);color:var(--tx);font-family:Georgia,'Times New Roman',serif;line-height:1.6}
+h1,h2,h3{font-weight:normal;line-height:1.2}
+a{color:inherit}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--ln)}
+.bar{max-width:1100px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{font-size:20px;text-decoration:none;letter-spacing:.5px}
+.logo b{color:var(--at)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{text-decoration:none;font:14px Arial,sans-serif;padding:8px 12px;border-radius:20px;color:var(--mut)}
+nav a:hover,nav a.on{background:var(--ac);color:#fff}
+main{max-width:1100px;margin:auto;padding:32px 20px 60px}
+.page{display:none}.page.on{display:block}
+.hero{text-align:center;padding:60px 20px;color:#fff;border-radius:0;width:100vw;margin-left:calc(50% - 50vw);background:radial-gradient(circle at 75% 15%,#A33B45 0,transparent 55%),linear-gradient(180deg,#5E1622,#2b0b11)}
+.hero.top{margin-top:-32px;min-height:calc(100vh - 70px);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero.top h1{font-size:clamp(36px,8vw,68px)}
+.hero h1{font-size:clamp(30px,6vw,52px);margin-bottom:12px}
+.hero p{max-width:520px;margin:0 auto 24px;opacity:.95}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;padding:12px 26px;border-radius:30px;font:15px Arial,sans-serif;cursor:pointer;text-decoration:none}
+.hero .btn{background:#fff;color:var(--ac)}
+h2{font-size:30px;margin:8px 0 6px}
+h3{font-size:20px;margin:0 0 6px}
+.sub{color:var(--mut);margin-bottom:20px}
+section.blk{margin-top:44px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:22px}
+.card .ic{font-size:30px;margin-bottom:8px}
+.card p{color:var(--mut);font:14px Arial,sans-serif}
+.price{color:var(--at);font:bold 14px Arial,sans-serif;margin-top:8px}
+.ph{aspect-ratio:4/3;border-radius:10px;background:var(--ln);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:12px}
+form{display:grid;gap:12px;max-width:520px}
+label{font:14px Arial,sans-serif;color:var(--mut);display:grid;gap:4px}
+input,select,textarea{font:15px Arial,sans-serif;padding:11px;border:1px solid var(--ln);border-radius:8px;background:var(--card);color:var(--tx);width:100%}
+.ok{display:none;color:var(--at);font:bold 15px Arial,sans-serif}
+footer{text-align:center;color:var(--mut);font:13px Arial,sans-serif;padding:24px;border-top:1px solid var(--ln)}
+.cart{text-align:center;padding:30px;color:var(--mut)}
+.finder{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:680px;margin:26px auto 0}
+.finder input{flex:1 1 240px;border-radius:30px;border:0;padding:12px 18px;color:#5E1622;background:#fffdf9}
+.hero .btn.ghost{background:transparent;color:#fff;border:1px solid #fff}
+#res{margin-top:20px}#res .note{color:var(--mut);font:14px Arial,sans-serif;margin-bottom:10px}
+#res .card a{color:var(--at);font:bold 14px Arial,sans-serif}
+.num{width:34px;height:34px;border-radius:50%;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font:bold 16px Arial,sans-serif;margin-bottom:10px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<a class="logo" href="#home">LR <b>Oficina da Beleza</b> ✂️</a>
+<nav>
+<a href="#home" data-p="home">Home</a>
+<a href="#loja" data-p="loja">Loja</a>
+<a href="#servicos" data-p="servicos">Serviços</a>
+<a href="#profissionais" data-p="profissionais">Profissionais</a>
+<a href="#agendamento" data-p="agendamento">Agendamento</a>
+<a href="#sobre" data-p="sobre">Sobre / Contato</a>
+</nav></div></header>
+
+<main>
+<!-- HOME -->
+<div class="page" id="home">
+<div class="hero top"><h1>LR Oficina da Beleza</h1><p>Cabelo, unhas, maquiagem e uma boutique cheia de estilo. Tudo para realçar a sua beleza num só lugar.</p><a class="btn" href="#agendamento">Agendar horário</a>
+<div class="finder"><input id="q" placeholder="Digite seu bairro, cidade ou CEP" onkeydown="if(event.key==='Enter')buscar()"><button class="btn" onclick="buscar()">Buscar loja</button><button class="btn ghost" onclick="geo()">📍 Usar minha localização</button></div></div>
+<div id="res"></div>
+<section class="blk"><h2>O que oferecemos</h2><div class="grid">
+<a class="card" href="#servicos" style="text-decoration:none"><div class="ic">✂️</div><h3>Serviços</h3><p>Cabelo, manicure, pedicure, maquiagem e estética.</p></a>
+<a class="card" href="#loja" style="text-decoration:none"><div class="ic">🛍️</div><h3>Boutique</h3><p>Roupas, bolsas, acessórios e produtos para cabelo.</p></a>
+<a class="card" href="#profissionais" style="text-decoration:none"><div class="ic">👩‍🦱</div><h3>Profissionais</h3><p>Conheça a equipe e veja nosso portfólio.</p></a>
+</div></section>
+<section class="blk"><h2>Serviços mais pedidos</h2><p class="sub">Os queridinhos das nossas clientes.</p><div class="grid">
+<div class="card"><div class="ic">💇‍♀️</div><h3>Corte &amp; Escova</h3><p>Visual novo com acabamento de salão.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><div class="ic">💅</div><h3>Manicure em Gel</h3><p>Unhas perfeitas por mais tempo.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><div class="ic">💄</div><h3>Maquiagem Social</h3><p>Para festas, formaturas e casamentos.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><div class="ic">🧖‍♀️</div><h3>Limpeza de Pele</h3><p>Pele renovada e luminosa.</p><div class="price">a partir de R$ 00</div></div>
+</div><p style="margin-top:18px"><a class="btn" href="#servicos">Ver todos os serviços</a></p></section>
+<section class="blk"><h2>Novidades na boutique</h2><p class="sub">Peças e produtos selecionados.</p><div class="grid">
+<div class="card"><div class="ph">👗</div><h3>Vestido</h3><div class="price">R$ 00,00</div></div>
+<div class="card"><div class="ph">👜</div><h3>Bolsa</h3><div class="price">R$ 00,00</div></div>
+<div class="card"><div class="ph">🧴</div><h3>Kit Hidratação</h3><div class="price">R$ 00,00</div></div>
+</div><p style="margin-top:18px"><a class="btn" href="#loja">Ir para a loja</a></p></section>
+<section class="blk"><h2>Como funciona</h2><div class="grid">
+<div class="card"><div class="num">1</div><h3>Escolha o serviço</h3><p>Veja as opções e valores.</p></div>
+<div class="card"><div class="num">2</div><h3>Agende o horário</h3><p>Dia e hora que couberem na sua rotina.</p></div>
+<div class="card"><div class="num">3</div><h3>Venha se cuidar</h3><p>Chegue e aproveite o momento.</p></div>
+</div></section>
+<section class="blk"><h2>Quem já passou por aqui</h2><div class="grid">
+<div class="card"><p>“Atendimento incrível, saí apaixonada pelo cabelo!”</p><div class="price">— Cliente 1 ⭐⭐⭐⭐⭐</div></div>
+<div class="card"><p>“Ambiente lindo e profissionais super atenciosas.”</p><div class="price">— Cliente 2 ⭐⭐⭐⭐⭐</div></div>
+<div class="card"><p>“Achei tudo no mesmo lugar: unha, roupa e produtos.”</p><div class="price">— Cliente 3 ⭐⭐⭐⭐⭐</div></div>
+</div></section>
+<section class="blk"><div class="hero" style="padding:40px 20px"><h2>Pronta para se transformar?</h2><p>Reserve seu horário em poucos cliques.</p><a class="btn" href="#agendamento">Agendar agora</a></div></section>
+</div>
+
+<!-- LOJA -->
+<div class="page" id="loja">
+<h2>Loja / Boutique 🛍️</h2><p class="sub">Escolha uma categoria.</p>
+<section class="blk" id="loja-roupas"><h3>Roupas &amp; Moda</h3><div class="grid">
+<div class="card"><div class="ph">👗</div><h3>Produto exemplo</h3><p>Descrição curta do produto.</p><div class="price">R$ 00,00</div></div>
+<div class="card"><div class="ph">👚</div><h3>Produto exemplo</h3><p>Descrição curta do produto.</p><div class="price">R$ 00,00</div></div></div></section>
+<section class="blk" id="loja-bolsas"><h3>Bolsas &amp; Acessórios</h3><div class="grid">
+<div class="card"><div class="ph">👜</div><h3>Produto exemplo</h3><p>Descrição curta do produto.</p><div class="price">R$ 00,00</div></div>
+<div class="card"><div class="ph">💍</div><h3>Produto exemplo</h3><p>Descrição curta do produto.</p><div class="price">R$ 00,00</div></div></div></section>
+<section class="blk" id="loja-cabelo"><h3>Produtos para Cabelo</h3><div class="grid">
+<div class="card"><div class="ph">🧴</div><h3>Produto exemplo</h3><p>Descrição curta do produto.</p><div class="price">R$ 00,00</div></div>
+<div class="card"><div class="ph">💆‍♀️</div><h3>Produto exemplo</h3><p>Descrição curta do produto.</p><div class="price">R$ 00,00</div></div></div></section>
+<section class="blk" id="loja-carrinho"><h3>Carrinho / Checkout</h3><div class="card cart">🛒 Seu carrinho está vazio.<br><small>(Aqui entra a lógica de carrinho e pagamento.)</small></div></section>
+</div>
+
+<!-- SERVIÇOS -->
+<div class="page" id="servicos">
+<h2>Serviços ✂️</h2><p class="sub">Cuidado completo, do cabelo às unhas.</p>
+<section class="blk" id="servicos-cabelo"><h3>Cabelo</h3><div class="grid">
+<div class="card"><h3>Corte</h3><p>Corte feminino, masculino e infantil.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><h3>Coloração</h3><p>Mechas, luzes, tintura e retoque.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><h3>Tratamentos</h3><p>Hidratação, escova progressiva e mais.</p><div class="price">a partir de R$ 00</div></div></div></section>
+<section class="blk" id="servicos-manicure"><h3>Manicure / Pedicure</h3><div class="grid">
+<div class="card"><h3>Manicure</h3><p>Esmaltação tradicional ou em gel.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><h3>Pedicure</h3><p>Cuidado e esmaltação dos pés.</p><div class="price">a partir de R$ 00</div></div></div></section>
+<section class="blk" id="servicos-maquiagem"><h3>Maquiagem / Estética</h3><div class="grid">
+<div class="card"><h3>Maquiagem</h3><p>Social, festa e noivas.</p><div class="price">a partir de R$ 00</div></div>
+<div class="card"><h3>Estética</h3><p>Design de sobrancelhas, limpeza de pele e outros.</p><div class="price">a partir de R$ 00</div></div></div></section>
+<p style="margin-top:28px"><a class="btn" href="#agendamento">Agendar um serviço</a></p>
+</div>
+
+<!-- PROFISSIONAIS -->
+<div class="page" id="profissionais">
+<h2>Profissionais 👩‍🦱</h2><p class="sub">Quem cuida de você.</p>
+<section class="blk" id="profissionais-equipe"><h3>Equipe</h3><div class="grid">
+<div class="card"><div class="ph">👩</div><h3>Nome da profissional</h3><p>Cabeleireira</p></div>
+<div class="card"><div class="ph">👩</div><h3>Nome da profissional</h3><p>Manicure</p></div>
+<div class="card"><div class="ph">👩</div><h3>Nome da profissional</h3><p>Maquiadora</p></div></div></section>
+<section class="blk" id="profissionais-especialidades"><h3>Especialidades</h3><div class="grid">
+<div class="card"><p>Coloração e mechas</p></div><div class="card"><p>Nail art</p></div><div class="card"><p>Maquiagem para noivas</p></div></div></section>
+<section class="blk" id="profissionais-portfolio"><h3>Portfólio / Fotos</h3><div class="grid">
+<div class="ph">📷</div><div class="ph">📷</div><div class="ph">📷</div><div class="ph">📷</div></div></section>
+</div>
+
+<!-- AGENDAMENTO -->
+<div class="page" id="agendamento">
+<h2>Agendamento 📅</h2><p class="sub">Escolha o serviço e o melhor horário. Confirmamos pelo WhatsApp.</p>
+<form onsubmit="return enviar(event,'okAg')">
+<label>Nome<input required placeholder="Seu nome"></label>
+<label>WhatsApp<input required type="tel" placeholder="(11) 90000-0000"></label>
+<label>Serviço<select required><option value="">Selecione</option><option>Cabelo</option><option>Manicure / Pedicure</option><option>Maquiagem / Estética</option></select></label>
+<label>Profissional<select><option>Sem preferência</option></select></label>
+<label>Data<input required type="date"></label>
+<label>Horário<input required type="time"></label>
+<button class="btn" type="submit">Solicitar agendamento</button>
+<p class="ok" id="okAg">✅ Pedido enviado! Em breve entraremos em contato.</p>
+</form></div>
+
+<!-- SOBRE / CONTATO -->
+<div class="page" id="sobre">
+<h2>Sobre / Contato 📞</h2>
+<section class="blk" id="sobre-historia"><h3>Nossa História</h3><p class="sub" style="max-width:640px">A LR Oficina da Beleza nasceu do desejo de unir cuidado, estilo e acolhimento em um só espaço. Conte aqui a sua história.</p></section>
+<section class="blk" id="sobre-horarios"><h3>Horários &amp; Local</h3><div class="grid">
+<div class="card"><h3>Horários</h3><p>Seg a Sex: 09h às 19h<br>Sábado: 09h às 17h<br>Domingo: fechado</p></div>
+<div class="card"><h3>Endereço</h3><p>Rua Exemplo, 000 – Bairro<br>Mauá – SP</p></div></div></section>
+<section class="blk" id="sobre-contato"><h3>Fale Conosco</h3>
+<form onsubmit="return enviar(event,'okCt')" style="margin-top:12px">
+<label>Nome<input required></label>
+<label>E-mail<input required type="email"></label>
+<label>Mensagem<textarea required rows="4"></textarea></label>
+<button class="btn" type="submit">Enviar mensagem</button>
+<p class="ok" id="okCt">✅ Mensagem enviada!</p>
+</form></section></div>
+</main>
+
+<footer>© 2026 LR Oficina da Beleza · Todos os direitos reservados</footer>
+
+<script>
+function enviar(e,id){e.preventDefault();document.getElementById(id).style.display='block';e.target.reset();return false}
+function rota(){
+  var h=(location.hash||'#home').slice(1),p=h.split('-')[0];
+  if(!document.getElementById(p)||!document.querySelector('.page#'+p))p='home';
+  document.querySelectorAll('.page').forEach(function(x){x.classList.toggle('on',x.id===p)});
+  document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('on',a.dataset.p===p)});
+  var t=h!==p&&document.getElementById(h);
+  if(t)t.scrollIntoView();else window.scrollTo(0,0);
+}
+/* Lojas: troque pelos dados reais (lat/lng = coordenadas da unidade) */
+var L=[{n:'LR Centro',a:'Rua Exemplo, 100 – Centro, Mauá – SP',la:-23.6677,lo:-46.4613,h:'Seg–Sáb · 9h às 19h'},
+{n:'LR Jardim',a:'Av. Modelo, 250 – Jardim das Flores, Santo André – SP',la:-23.6639,lo:-46.5383,h:'Seg–Sáb · 9h às 19h'},
+{n:'LR Shopping',a:'Shopping Exemplo, Loja 12 – Centro, São Paulo – SP',la:-23.5505,lo:-46.6333,h:'Seg–Dom · 10h às 22h'}];
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function dist(a,b,c,d){var r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2),k=x*x+Math.cos(a*r)*Math.cos(c*r)*y*y;return 12742*Math.asin(Math.sqrt(k))}
+function show(list,note){document.getElementById('res').innerHTML=(note?'<p class="note">'+note+'</p>':'')+'<div class="grid">'+list.map(function(s){return '<div class="card"><h3>📍 '+s.n+'</h3><p>'+s.a+'<br>'+s.h+(s.km!=null?'<br><b>'+s.km.toFixed(1)+' km de você</b>':'')+'</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.a)+'">Como chegar →</a></div>'}).join('')+'</div>'}
+function buscar(){var t=norm(document.getElementById('q').value.trim());if(!t){show(L,'Nossas unidades:');return}
+var f=L.filter(function(s){return norm(s.a+' '+s.n).indexOf(t)>-1});
+show(f.length?f:L,f.length?'Unidades encontradas:':'Não achamos esse endereço exato. Veja todas as nossas unidades:')}
+function geo(){if(!navigator.geolocation){show(L,'Seu navegador não permite localização.');return}
+navigator.geolocation.getCurrentPosition(function(p){var l=L.map(function(s){var o=Object.assign({},s);o.km=dist(p.coords.latitude,p.coords.longitude,s.la,s.lo);return o}).sort(function(a,b){return a.km-b.km});show(l,'Unidades mais próximas de você:')},function(){show(L,'Não foi possível pegar sua localização. Digite seu bairro ou cidade.')})}
+window.addEventListener('hashchange',rota);rota();
+</script>
+</body>
+</html>
