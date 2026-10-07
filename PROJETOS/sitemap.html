@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap Visual - Salão de Beleza & Boutique</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e5e5e5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .sitemap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+        }
+        /* Estilo dos Blocos Básicos */
+        .node {
+            padding: 15px 25px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.15);
+            min-width: 150px;
+        }
+        /* Cores conforme a hierarquia/tipo */
+        .home-node {
+            background-color: #8cc6f4;
+            color: #333;
+            font-size: 16px;
+            padding: 20px 40px;
+        }
+        .main-node {
+            background-color: #a4f2d6;
+            color: #2b5446;
+        }
+        .sub-node {
+            font-weight: normal;
+            font-size: 13px;
+        }
+        /* Cores das Subcategorias (Inspiradas na imagem) */
+        .color-loja { background-color: #d1bbf3; color: #4e3575; }
+        .color-servicos { background-color: #f7bfa1; color: #7a3e1d; }
+        .color-profissionais { background-color: #f9d884; color: #6e5210; }
+        .color-sobre { background-color: #ccc5b3; color: #4a4538; }
+
+        /* Estrutura de Conexões e Linhas */
+        .branch-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+            margin-top: 30px;
+        }
+        /* Linha Horizontal Principal Superior */
+        .branch-container::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: #666;
+        }
+        /* Linha Vertical da Home até a Horizontal Principal */
+        .home-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .home-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background-color: #666;
+        }
+        /* Colunas de cada Categoria Principal */
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+            position: relative;
+        }
+        /* Pequena linha vertical conectando a linha principal ao bloco verde */
+        .column::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background-color: #666;
+        }
+        /* Container para os filhos na vertical */
+        .sub-list {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            margin-top: 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+        /* Linha vertical lateral para os filhos */
+        .sub-list::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            bottom: 22px;
+            width: 2px;
+            background-color: #666;
+        }
+        .sub-item {
+            position: relative;
+            margin-top: 15px;
+            width: 100%;
+        }
+        /* Linha horizontal conectando a linha vertical ao bloco filho */
+        .sub-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 10px;
+            height: 2px;
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sitemap">
+        <!-- Nível 1: Home -->
+        <div class="home-wrapper">
+            <div class="node home-node">Home 🏠</div>
+        </div>
+
+        <!-- Nível 2: Categorias Principais (Linha Horizontal) -->
+        <div class="branch-container">
+            
+            <!-- Coluna 1: Loja / Boutique (Nova seção para organizar suas vendas) -->
+            <div class="column">
+                <div class="node main-node">Loja / Boutique 🛍️</div>
+                <div class="sub-list">
+                    <div class="sub-item"><div class="node sub-node color-loja">Roupas & Moda</div></div>
+                    <div class="sub-item"><div class="node sub-node color-loja">Bolsas & Acess.</div></div>
+                    <div class="sub-item"><div class="node sub-node color-loja">Prod. Cabelo</div></div>
+                    <div class="sub-item"><div class="node sub-node color-loja">Carrinho / Checkout</div></div>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Serviços -->
+            <div class="column">
+                <div class="node main-node">Serviços ✂️</div>
+                <div class="sub-list">
+                    <div class="sub-item"><div class="node sub-node color-servicos">Cabelo</div></div>
+                    <div class="sub-item"><div class="node sub-node color-servicos">Manicure / Pedicure</div></div>
+                    <div class="sub-item"><div class="node sub-node color-servicos">Maquiagem / Estética</div></div>
+                </div>
+            </div>
+
+            <!-- Coluna 3: Profissionais -->
+            <div class="column">
+                <div class="node main-node">Profissionais 👩‍🦱</div>
+                <div class="sub-list">
+                    <div class="sub-item"><div class="node sub-node color-profissionais">Equipe</div></div>
+                    <div class="sub-item"><div class="node sub-node color-profissionais">Especialidades</div></div>
+                    <div class="sub-item"><div class="node sub-node color-profissionais">Portfólio / Fotos</div></div>
+                </div>
+            </div>
+
+            <!-- Coluna 4: Agendamento (Sem subpáginas, igual ao "Contact Us" da foto) -->
+            <div class="column">
+                <div class="node main-node">Agendamento 📅</div>
+            </div>
+
+            <!-- Coluna 5: Sobre / Contato -->
+            <div class="column">
+                <div class="node main-node">Sobre / Contato 📞</div>
+                <div class="sub-list">
+                    <div class="sub-item"><div class="node sub-node color-sobre">Nossa História</div></div>
+                    <div class="sub-item"><div class="node sub-node color-sobre">Horários & Local</div></div>
+                    <div class="sub-item"><div class="node sub-node color-sobre">Fale Conosco</div></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
