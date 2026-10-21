@@ -162,3 +162,87 @@ body {
     font-weight: bold;
     color: #333;
 }
+
+/* ESTILOS DO RODAPÉ */
+.rodape-principal {
+    background-color: #fffcf3;
+    border-top: 1px solid #8d05054b;
+    padding: 40px 10%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+    align-items: flex-start;
+}
+
+.rodape-coluna h3 {
+    font-size: 14px;
+    color: #555;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.rodape-links a {
+    display: block;
+    color: #888;
+    text-decoration: none;
+    font-size: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.rodape-links a:hover {
+    color: #4a1525;
+}
+
+.logo-rodape {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.logo-texto {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    letter-spacing: 2px;
+}
+
+.logo-rodape p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.logo-rodape small {
+    font-size: 11px;
+    color: #726b6b;
+    font-style: italic;
+}
+
+.redes-sociais {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.icone-social {
+    text-decoration: none;
+    font-size: 18px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.icone-social:hover {
+    opacity: 1;
+}
+
+.rodape-servicos-lista {
+    list-style: none;
+}
+
+.rodape-servicos-lista li {
+    color: #858688;
+    font-size: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}

@@ -8,18 +8,18 @@
 </head>
 <body>
 
-    <!-- 1. CABEÇALHO & BANNER PRINCIPAL -->
-    <header class="cabecalho-container">
-        <span class="marcador-logo">LOGO</span>
-        <nav class="menu-navegacao">
-            <a href="#">Home</a>
-            <a href="#">Quem Somos</a>
-            <a href="#">Trabalhos</a>
-            <a href="#">Agendamento</a>
-            <a href="#">Serviços</a>
-            <a href="#">Contatos</a>
-        </nav>
-    </header>
+<header class="cabecalho-container">
+    <span class="marcador-logo">LOGO</span>
+    <nav class="menu-navegacao">
+        <a href="index.html">Home</a>
+        <a href="#sobre">Quem Somos</a>
+        <!-- Este muda de página: -->
+        <a href="servicos.html">Serviços</a> 
+        <a href="#agendamento">Agendamento</a>
+        <a href="#estudios">Unidades</a>
+    </nav>
+</header>
+
 
     <main>
 
@@ -70,6 +70,51 @@
         </section>
 
     </main>
+    <!-- RODAPÉ COMPARTILHADO -->
+<!-- RODAPÉ COMPARTILHADO 100% SEMÂNTICO -->
+<footer class="rodape-principal">
+    
+    <!-- Coluna 1: Mapa do Site -->
+    <section class="rodape-coluna">
+        <h3>SITE MAP</h3>
+        <nav class="rodape-links">
+            <a href="index.html">HOME</a>
+            <a href="index.html#sobre">SOBRE</a>
+            <a href="index.html#agendamento">AGENDAMENTO</a>
+            <a href="servicos.html">SERVIÇOS</a>
+            <a href="index.html#estudios">UNIDADES</a>
+            <a href="#contato">CONTATO</a>
+        </nav>
+    </section>
+
+    <!-- Coluna 2: Identidade e Redes Sociais -->
+    <section class="rodape-coluna centro">
+        <header class="logo-rodape">
+            <strong class="logo-texto">LR</strong>
+            <p>Oficina da Beleza</p>
+            <small>Onde a beleza é arte</small>
+        </header>
+        <nav class="redes-sociais">
+            <a href="#" class="icone-social">🌐</a>
+            <a href="#" class="icone-social">🎵</a>
+            <a href="#" class="icone-social">💬</a>
+        </nav>
+    </section>
+
+    <!-- Coluna 3: Listagem de Serviços -->
+    <section class="rodape-coluna">
+        <h3>SERVIÇOS</h3>
+        <ul class="rodape-servicos-lista">
+            <li>CABELOS</li>
+            <li>PENTEADOS</li>
+            <li>TINTURA</li>
+            <li>TRATAMENTOS</li>
+        </ul>
+    </section>
+
+</footer>
+
+
 
 </body>
 </html>
