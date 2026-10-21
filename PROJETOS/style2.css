@@ -10,9 +10,9 @@ body {
     color: #333;
 }
 
-/* 1. CABEÇALHO & BANNER PRINCIPAL */
+/* BANNER PRINCIPAL */
 .cabecalho-container {
-    background-color: #4a1525; /* Tom vinho do topo original */
+    background-color: #4a1525; 
     color: white;
     display: flex;
     justify-content: space-between;
@@ -56,7 +56,7 @@ body {
     justify-content: center;
 }
 
-/* 2. BOAS-VINDAS & GALERIA */
+/* BOAS-VINDAS E GALERIA */
 .secao-boas-vindas {
     text-align: center;
     padding: 40px 10%;
@@ -96,7 +96,7 @@ body {
     border: 1px dashed #b0b0b0;
 }
 
-/* 3. SOBRE NÓS */
+/* SOBRE NÓS */
 .secao-sobre {
     background-color: #f7ebe1; /* Fundo rosado/bege da seção */
     text-align: center;
@@ -129,7 +129,7 @@ body {
     color: #7f8c8d;
 }
 
-/* 4. STUDIOS / UNIDADES */
+/* STUDIOS / UNIDADES */
 .secao-estudios {
     text-align: center;
     padding: 50px 10%;
@@ -162,7 +162,7 @@ body {
     color: #333;
 }
 
-/* ESTILOS DO RODAPÉ */
+/* RODAPÉ */
 .rodape-principal {
     background-color: #fffcf3;
     border-top: 1px solid #8d05054b;
