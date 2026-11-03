@@ -1,0 +1,54 @@
+
+1. Criação de Variáveis (Palavras-chave)
+
+• const: Abreviação de constant (constante). Cria uma variável cujo valor não pode ser alterado depois de definido.
+• let: Cria uma variável cujo valor pode ser alterado (modificado) mais tarde no código.
+• =  (Sinal de igual sozinho): É o operador de atribuição. Ele pega o valor que está na direita e o guarda dentro da variável que está na esquerda.
+
+2. Entrada de Dados (readline-sync)
+
+• require: Uma função do Node.js usada para importar (trazer) módulos ou bibliotecas externas para o seu arquivo.
+• "readline-sync": O nome da biblioteca que permite ao programa fazer perguntas e ler o que o usuário digita no terminal.
+• entrada: O nome escolhido para a variável que guarda a biblioteca importada. Poderia ser qualquer nome, mas entrada faz sentido porque serve para receber dados.
+• .  (Ponto): O operador de membro. Ele serve para acessar uma função ou propriedade que está dentro de um objeto (ex: entrada.question acessa a função question que está dentro de entrada).
+• question: Uma função que exibe uma mensagem na tela e espera o usuário digitar um texto (String) e apertar Enter.
+• questionInt: Uma variação que já lê o que o usuário digitou e converte diretamente em um número inteiro (sem casas decimais).
+
+3. Manipulação de Tipos e Textos
+
+• Number: Uma função nativa do JavaScript usada para converter outros tipos de dados (como um texto "50") em um número real (50).
+• Number.isNaN ou isNaN: Funções que verificam se o valor dentro dos parênteses Não é um Número (Is Not a Number). Retorna true se for inválido (como um texto) e false se for um número válido.
+• toUpperCase(): Uma função que transforma todas as letras de um texto em MAIÚSCULAS (ex: 's' vira 'S').
+• toFixed(2): Uma função aplicável a números para definir quantas casas decimais serão exibidas (no caso, 2 casas após a vírgula).
+
+4. Controle de Fluxo (Condicionais)
+
+• if: Significa "se". Avalia uma condição dentro dos parênteses ( ). Se for verdadeira (true), executa o bloco de código que está entre as chaves { }.
+• else if: Significa "senão, se". É usado para testar uma nova condição caso o if anterior tenha sido falso.
+• else: Significa "senão". É o caso de erro ou a "última opção". Ele executa o código se nenhuma das condições anteriores for verdadeira.
+
+5. Exibição no Terminal (Saída)
+
+• console: Um objeto nativo do JavaScript que dá acesso ao terminal/console do sistema.
+• log: Uma função de dentro do console que imprime (escreve) uma mensagem na tela.
+• ` (Crases / Template Literals): Permitem criar textos onde você pode misturar palavras fixas com variáveis facilmente.
+• ${ }: Usado apenas dentro de crases. Tudo o que for colocado dentro das chaves será processado como código JavaScript (geralmente uma variável ou cálculo) e injetado no meio do texto.
+• \n: Um caractere especial oculto que serve para pular uma linha no terminal.
+
+6. Operadores Lógicos e de Comparação
+
+• >= : Operador de Maior ou Igual.
+• <= : Operador de Menor ou Igual.
+• < : Operador de Menor que.
+• > : Operador de Maior que.
+• ||: Operador lógico OU (OR). Retorna verdadeiro se pelo menos uma das condições for verdadeira.
+• &&: Operador lógico E (AND). Só retorna verdadeiro se todas as condições forem verdadeiras ao mesmo tempo.
+• ==: Operador de igualdade fraca. Compara apenas o valor, ignorando o tipo (ex: 18 == "18" é true).
+• ===: Operador de igualdade estrita. Compara o valor e o tipo de dado (ex: 18 === "18" é false porque um é número e o outro é texto).
+• ? e : (Operador Ternário): Um if/else resumido em uma linha.
+	• Estrutura: (condição) ? valor_se_verdadeiro : valor_se_falso;
+
+7. Operadores Aritméticos (Matemática)
+
+• * : Multiplicação.
+• - : Subtração.
