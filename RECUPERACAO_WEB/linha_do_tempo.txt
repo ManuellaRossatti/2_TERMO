@@ -1,0 +1,21 @@
+Marcos: 
+ARPANET: Primeira rede de comunicação criada no mundo que funcionou antes da criação da Internet.
+1969: Criação da Arpanet com quatro pontos de comunicação em universidades dos EUA.
+década de 1970: Utilização de mais pontos de comunicação e o ínicio do protocolo NCP.
+NCP: Protocolo utilizado durante a era da ARPANET para gerenciar a comunicação e transferir arquivos.
+TCP/IP: Vários protocolos de comunicação que trabalham para definir a criação dos dados, como serão transportados, o endereço e como serão recwebidos.
+1983: Surge o TCP/IP protocolos que estavam presente enquanto a ARPANET evoluia.
+WWW/HTML/HTTP: WWW é a rede de computadores onde podem ser acessadas as páginas e os recursos proporcionados pelos navegadores, HTTP faz a comunicação do seu computador com a rede e o HTML que é alinguagem de marcação é o que estrutura as páginas da web.
+RNP: Rede Nacional de Ensino e Pesquisa, é um sistema brasileiro criado para a comunicação entre universidades e institutos de pesquisa, um local digital que alunos, professores e pesquisadores utilizam para compartilhar conhecimento.
+1995: Foi o ano da criação da Web. WWW. HTML e HTTP foram criados pelo Tim Berners-Lee.
+
+Internet e Web são a mesma coisa? Por quê?
+R: Não,  a internet é apenas a rede que conecta os computadores do mundo inteiro possibilitando que haja comunicação entre eles. Web é um sistema que utiliza a internet para o acesso de páginas e recursos dentro de navegadores.
+
+
+Checkpoint: explique com um exemplo simples por que a comunicação por pacotes é importante para
+entender o funcionamento da Internet.
+R: O sistema de comunicação funciona quebrando as informações em pedaços justamente para garantir que ninguém consiga travar a comunicação e a rede continue funcionando para todos os computadores.
+Por exemplo, se não houvesse essa quebra de informações o sistema ficaria congestionado e nínguém conseguiria enviar informações ao mesmo tempo, não seria possível os pacotes de informações serem enviados por caminhos diferentes caso algum caminho esteja congestionado, e
+também seria mais difícil recuperar uma informação inteira que se perdeu do que apenas um pedaço dela.
+

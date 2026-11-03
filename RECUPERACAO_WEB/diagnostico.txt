@@ -1,0 +1,17 @@
+1. Identifique no computador utilizado: processador, quantidade de RAM e tipo/capacidade de
+armazenamento.
+R: 
+Processador: Intel(R) Core(TM) i5-14500 (2.60 GHz)
+RAM:16,0 GB (utilizável: 15,7 GB)
+Tipo/capacidade: Sistema operacional de 64 bits, processador baseado em x64, 954GB.
+
+2. Anote qual sistema operacional está instalado.
+R: Windows
+
+3. Liste dois navegadores disponíveis.
+R: Chrome e Edge.
+
+Checkpoint: explique a diferença entre hardware e software e cite dois exemplos de cada um
+relacionados à aula. 
+Hardware é o nome dado a todos os componentes físicos da máquina como por exemplo o monitor, o porcessador e a placa mãe.
+Software é o nome dado a todos os programas que são utilizados pelo usuário através dos hardwares. Exmplos de software são o sistema operacional Windows e seu navegador Edge.
