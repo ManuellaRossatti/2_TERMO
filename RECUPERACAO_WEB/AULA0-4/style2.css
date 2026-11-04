@@ -1,0 +1,115 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0c1b 0%, #000000 50%, #1a0505 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #ff3333, #800000);
+        border-radius: 8px;
+}
+
+p {
+    text-align: center;
+    color: #a0a0a0;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    font-size: 1.1rem;
+}
+
+
+h2 {
+    max-width: 800px;
+    margin: 30px auto 10px auto;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, #800000, #000000);
+    color: #ffffff;
+    border-left: 5px solid #990f0f;
+    border-radius: 4px;
+    font-size: 1.4rem;
+}
+
+h2 + p {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    background: rgba(20, 20, 20, 0.7);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 51, 51, 0.1);
+
+
+}
+
+h2 + p br + strong, 
+h2 + p text {
+    color: #ff5555;
+}
+
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 30px auto;
+    border-radius: 8px;
+    border: 2px solid #800000;
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 51, 51, 0.4);
+}
+
+ul {
+    max-width: 800px;
+    margin: 40px auto;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+ul li a {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(90deg, #1a0000, #330000);
+    color: #ff4d4d;
+    font-weight: bold;
+    border: 1px solid #800000;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+ul li a:hover {
+    background: linear-gradient(90deg, #ff3333, #800000);
+    color: #ffffff;
+    border-color: #ff3333;
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+    transform: translateY(-2px);
+}
+
+/* responsivo */
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    body { padding: 20px 10px; }
+    h2 + p { padding: 15px; }
+}
