@@ -1,0 +1,427 @@
+/* Importação de fontes futuristas e limpas */
+@import url('https://googleapis.com');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Fundo Sci-Fi Imersivo com Névoas em Degradê */
+body {
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(211, 47, 47, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(156, 39, 176, 0.05) 0%, transparent 40%),
+    linear-gradient(135deg, #050508 0%, #120505 50%, #020204 100%);
+  color: #E2E8F0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Linhas de scan digital para textura de monitor futurista */
+.radar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+  background-size: 100% 4px;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Cabeçalho / Painel de Controle */
+header {
+  border-bottom: 1px solid rgba(211, 47, 47, 0.3);
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.4rem;
+  letter-spacing: 4px;
+  color: #FFF;
+  text-transform: uppercase;
+}
+
+.neon-red {
+  color: #FF2E2E;
+  text-shadow: 0 0 10px rgba(255, 46, 46, 0.6), 0 0 20px rgba(255, 46, 46, 0.3);
+}
+
+.subtitle {
+  color: #94A3B8;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  margin-top: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.counter-box {
+  background: rgba(211, 47, 47, 0.03);
+  border: 1px solid rgba(211, 47, 47, 0.4);
+  padding: 8px 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(211, 47, 47, 0.1);
+}
+
+.counter-label {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  font-weight: 600;
+  display: block;
+}
+
+.counter-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  color: #FF2E2E;
+  text-shadow: 0 0 10px rgba(255, 46, 46, 0.5);
+}
+
+/* Abas de Navegação Estilo HUD */
+.main-navigation {
+  max-width: 1200px;
+  margin: 30px auto 10px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  background: rgba(30, 30, 40, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94A3B8;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-btn:hover, .nav-btn.active {
+  color: #FFF;
+  border-color: #FF2E2E;
+  background: linear-gradient(180deg, rgba(211, 47, 47, 0.15) 0%, transparent 100%);
+  box-shadow: 0 4px 20px rgba(211, 47, 47, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Área de Conteúdo Principal */
+main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 20px 40px 20px;
+}
+
+.page-content {
+  display: none;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.page-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Painel de Filtros Avançado */
+.filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.search-box input {
+  width: 100%;
+  background: rgba(15, 15, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 16px 20px;
+  color: #FFF;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #FF2E2E;
+  background: rgba(20, 10, 10, 0.8);
+  box-shadow: 0 0 20px rgba(255, 46, 46, 0.2);
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  background: rgba(30, 30, 45, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: #FF2E2E;
+  color: #FFF;
+  border-color: #FF2E2E;
+  box-shadow: 0 0 15px rgba(255, 46, 46, 0.4);
+}
+
+/* Grid de Cartões */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* Cartões com Efeito de Vidro e Flutuação */
+.card {
+  background: linear-gradient(135deg, rgba(20, 20, 30, 0.6) 0%, rgba(10, 10, 15, 0.8) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Transição ultra suave de flutuação */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.4s ease, 
+              box-shadow 0.4s ease;
+}
+
+/* Efeito ao passar o mouse: flutua para cima, brilha e altera degradê */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 46, 46, 0.5);
+  box-shadow: 0 12px 30px rgba(255, 46, 46, 0.15), 0 0 0 1px rgba(255, 46, 46, 0.2);
+}
+
+/* Barra luminosa superior mudando de cor com base no status */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #64748B;
+}
+
+.card.status-deceased::before { background: linear-gradient(90deg, #FF2E2E, #991B1B); }
+.card.status-in-custody::before { background: linear-gradient(90deg, #F59E0B, #D97706); }
+.card.status-at-large::before { background: linear-gradient(90deg, #10B981, #059669); }
+.card.status-terminated::before { background: linear-gradient(90deg, #A855F7, #7E22CE); }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.blacklist-number {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #FF2E2E;
+}
+
+.badge-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #CBD5E1;
+}
+
+/* Cores customizadas discretas para o texto das tags de status */
+.card.status-deceased .badge-status { color: #FFA1A1; background: rgba(255, 46, 46, 0.1); }
+.card.status-in-custody .badge-status { color: #FCD34D; background: rgba(245, 158, 11, 0.1); }
+.card.status-at-large .badge-status { color: #6EE7B7; background: rgba(16, 185, 129, 0.1); }
+.card.status-terminated .badge-status { color: #E9D5FF; background: rgba(168, 85, 247, 0.1); }
+
+.card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 4px;
+}
+
+.season-tag {
+  font-size: 0.8rem;
+  color: #64748B;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.terminal-desc {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 0.95rem;
+  color: #94A3B8;
+  line-height: 1.4;
+  min-height: 75px;
+  border-left: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Mensagem de Erros de Busca */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px;
+  color: #FF2E2E;
+  font-weight: 600;
+  border: 1px dashed rgba(255, 46, 46, 0.4);
+  background: rgba(255, 46, 46, 0.02);
+  border-radius: 8px;
+}
+
+/* Paginação Futurista */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.pag-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 46, 46, 0.5);
+  color: #FF2E2E;
+  padding: 10px 22px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pag-btn:hover {
+  background: #FF2E2E;
+  color: #FFF;
+  box-shadow: 0 0 15px rgba(255, 46, 46, 0.3);
+}
+
+#page-indicator {
+  font-weight: 600;
+  color: #94A3B8;
+}
+
+/* Painel de História do Site */
+.history-container {
+  background: linear-gradient(135deg, rgba(20, 20, 30, 0.4) 0%, rgba(10, 10, 15, 0.6) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 46, 46, 0.2);
+  border-radius: 8px;
+  padding: 35px;
+}
+
+.history-container h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: #FF2E2E;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+}
+
+.history-body p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #CBD5E1;
+  font-size: 1.1rem;
+  text-align: justify;
+}
+
+.history-body p strong {
+  color: #FF2E2E;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  margin-right: 5px;
+}
+
+/* Rodapé / Linha de Mensagem do Red */
+footer {
+  background: #030305;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 18px;
+  margin-top: auto;
+}
+
+.quote-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 1rem;
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-prompt {
+  color: #FF2E2E;
+  font-weight: 700;
+}
+
+#quote-text {
+  color: #94A3B8;
+  font-weight: 500;
+  transition: opacity 0.4s ease;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .counter-box {
+    width: 100%;
+    text-align: center;
+  }
+  .main-navigation {
+    justify-content: center;
+  }
+}

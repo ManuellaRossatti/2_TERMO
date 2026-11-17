@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Blacklist - Intelligence Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background overlay com efeito radar militar -->
+  <div class="radar-overlay"></div>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <h1>THE <span class="neon-red">BLACKLIST</span></h1>
+        <p class="subtitle">RESTRICTED ACCESS // FBI CLASSIFIED DOSSIER</p>
+      </div>
+      <div class="counter-box">
+        <span class="counter-label">TOTAL CRIMINALS IN DATA:</span>
+        <span id="criminal-counter" class="counter-value">000</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sistema de Navegação (Abas) -->
+  <nav class="main-navigation">
+    <button class="nav-btn active" onclick="switchPage('dossier')">BLACKMASTER DOSSIER</button>
+    <button class="nav-btn" onclick="switchPage('history')">THE STORY / LOGS</button>
+  </nav>
+
+  <main>
+    <!-- PÁGINA 1: DOSSIER INTERATIVO -->
+    <section id="page-dossier" class="page-content active">
+      <div class="filter-panel">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Search by name or number (e.g. 01, Wujing)...">
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-status="all">ALL</button>
+          <button class="filter-btn" data-status="deceased">DECEASED</button>
+          <button class="filter-btn" data-status="in custody">IN CUSTODY</button>
+          <button class="filter-btn" data-status="at large">AT LARGE</button>
+          <button class="filter-btn" data-status="terminated">TERMINATED</button>
+        </div>
+      </div>
+
+      <!-- Grid de Cartões -->
+      <div id="blacklist-grid" class="grid-container"></div>
+
+      <!-- Paginação Avançada -->
+      <div class="pagination-container">
+        <button id="prev-page" class="pag-btn">&lt; PREV</button>
+        <span id="page-indicator">PAGE 1 OF 3</span>
+        <button id="next-page" class="pag-btn">NEXT &gt;</button>
+      </div>
+    </section>
+
+    <!-- PÁGINA 2: HISTÓRIA DA SÉRIE -->
+    <section id="page-history" class="page-content">
+      <div class="history-container">
+        <h2>OPERATION OVERVIEW: RAYMOND REDDINGTON</h2>
+        <div class="history-body">
+          <p><strong>[OVERVIEW]</strong> Em 2013, o criminoso mais procurado do mundo, Raymond "Red" Reddington, rende-se voluntariamente na sede do FBI em Washington, D.C. Ele afirma ter os mesmos interesses que o governo: eliminar criminosos perigosos, terroristas e mentes brilhantes do submundo que a própria inteligência americana desconhece.</p>
+          
+          <p><strong>[THE CONDITION]</strong> Reddington exige cooperar exclusivamente com a recém-formada profiler do FBI, Elizabeth Keen. Ao longo de dez temporadas consecutivas, a Task Force secreta (Posto de Escuta Postal) caça estes alvos codificados por números, revelando conspirações internacionais profundas conectadas ao passado misterioso de Keen e Reddington.</p>
+          
+          <p><strong>[FINAL ENTRIES]</strong> A lista não segue um nível hierárquico de perigo, mas sim um tabuleiro tático operado por Reddington. À medida que o dossier alcança os seus episódios finais na 10ª temporada, a linha entre a justiça federal e o império do crime funde-se completamente num desfecho lendário.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé com Citações do Red -->
+  <footer>
+    <div class="quote-panel">
+      <span class="terminal-prompt">RED_LOG_QUOTE$ </span>
+      <span id="quote-text">"Não podes julgar o valor de um homem pelo que ele faz nos seus piores momentos."</span>
+    </div>
+  </footer>
+
+  <script src="database.js"></script>
+  <script>
+    // Lógica de Renderização e Estado da Aplicação
+    let filteredList = [...blacklistData];
+    let currentPage = 1;
+    const itemsPerPage = 8; // Mantém a tela limpa e com excelente mobilidade
+
+    const grid = document.getElementById('blacklist-grid');
+    const searchInput = document.getElementById('search-input');
+    const counter = document.getElementById('criminal-counter');
+    const pageIndicator = document.getElementById('page-indicator');
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      
+      // Atualiza contador digital principal
+      counter.textContent = String(blacklistData.length).padStart(3, '0');
+
+      // Paginação
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const pageItems = filteredList.slice(startIndex, endIndex);
+
+      if (pageItems.length === 0) {
+        grid.innerHTML = `<div class="no-results">NO COMPROMISED TARGETS FOUND ACCORDING TO SEARCH ALGORITHM.</div>`;
+        pageIndicator.textContent = "PAGE 0 OF 0";
+        return;
+      }
+
+      pageItems.forEach(item => {
+        const card = document.createElement('div');
+        card.className = `card status-${item.status.toLowerCase().replace(' ', '-')}`;
+        card.innerHTML = `
+          <div class="card-header">
+            <span class="blacklist-number">Nº ${item.id}</span>
+            <span class="badge-status">${item.status.toUpperCase()}</span>
+          </div>
+          <div class="card-body">
+            <h3>${item.name}</h3>
+            <p class="season-tag">DETECTED: SEASON ${item.season}</p>
+            <div class="terminal-desc">
+              <p class="desc-text">${item.description}</p>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Atualiza botões e indicadores
+      const totalPages = Math.ceil(filteredList.length / itemsPerPage);
+      pageIndicator.textContent = `PAGE ${currentPage} OF ${totalPages || 1}`;
+    }
+
+    // Filtros de Texto e Status Integrados
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase();
+      const activeStatusBtn = document.querySelector('.filter-btn.active');
+      const targetStatus = activeStatusBtn.getAttribute('data-status');
+
+      filteredList = blacklistData.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(query) || item.id.includes(query);
+        const matchesStatus = targetStatus === 'all' || item.status.toLowerCase() === targetStatus;
+        return matchesSearch && matchesStatus;
+      });
+
+      currentPage = 1; // Reseta para a primeira página ao filtrar
+      renderGrid();
+    }
+
+    // Event Listeners para pesquisa
+    searchInput.addEventListener('input', applyFilters);
+
+    // Event Listeners para botões de Status
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        applyFilters();
+      });
+    });
+
+    // Controladores de Paginação
+    document.getElementById('prev-page').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderGrid();
+      }
+    });
+
+    document.getElementById('next-page').addEventListener('click', () => {
+      const totalPages = Math.ceil(filteredList.length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderGrid();
+      }
+    });
+
+    // Sistema de Troca de Páginas (Tabs)
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById(`page-${pageId}`).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Carrossel de Citações Automático
+    let currentQuoteIndex = 0;
+    setInterval(() => {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotesData.length;
+      document.getElementById('quote-text').style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById('quote-text').textContent = quotesData[currentQuoteIndex];
+        document.getElementById('quote-text').style.opacity = 1;
+      }, 400);
+    }, 6000);
+
+    // Renderização Inicial
+    renderGrid();
+  </script>
+</body>
+</html>
