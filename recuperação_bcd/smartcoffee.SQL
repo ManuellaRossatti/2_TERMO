@@ -1,0 +1,22 @@
+DROP DATABASE IF EXISTS smartcoffee_manu;
+CREATE DATABASE smartcoffee_manu;
+USE smartcoffee_manu;
+
+CREATE TABLE IF NOT EXISTS 'CATEGORIA' (
+'id' INT NOT NULL AUTO_INCREMENT,
+'nome' VARCHAR(100) NOT NULL,
+PRIMARY KEY ('id')
+);
+
+CREATE TABLE IF NOT EXISTS 'PRODUTO' (
+'id' INT NOT NULL AUTO_INCREMENT,
+'nome' VARCHAR(100) NOT NULL,
+'descricao' VARCHAR(255) NOT NULL,
+'preco' DECIMAL(10,2) NOT NULL,
+'id_categoria' INT,
+PRIMARY KEY ('id'),
+FOREIGN KEY ('id_categoria') REFERENCES 'CATEGORIA'('id')
+CHECK (preco >= 0)
+);
+
+
