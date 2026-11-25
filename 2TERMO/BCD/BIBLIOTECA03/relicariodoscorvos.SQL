@@ -1,4 +1,5 @@
--- Active: 1794936279300@@127.0.0.1@3308@relicario_dos_corvos
+-- Active: 1795607127997@@127.0.0.1@3308@relicario_dos_corvos
+
 DROP DATABASE IF EXISTS RELICARIO_DOS_CORVOS;
 
 CREATE DATABASE IF NOT EXISTS RELICARIO_DOS_CORVOS;
@@ -9,14 +10,15 @@ USE RELICARIO_DOS_CORVOS;
 
 ----------------------------------------------------------------------------------
 
-CREATE TABLE USUARIO (
-    ID_USUARIO INT AUTO_INCREMENT,
+CREATE TABLE ALUNO (
+    ID_ALUNO INT AUTO_INCREMENT,
     NOME VARCHAR(100) NOT NULL,
+    TURMA VARCHAR(100) NOT NULL,
     EMAIL VARCHAR(120) NOT NULL,
     TELEFONE VARCHAR(20),
     ATIVO BOOLEAN DEFAULT TRUE,
 
-    CONSTRAINT PK_ID_USUARIO PRIMARY KEY (ID_USUARIO),
+    CONSTRAINT PK_ID_ALUNO PRIMARY KEY (ID_ALUNO),
     CONSTRAINT UQ_EMAIL UNIQUE (EMAIL)
 );
 
@@ -34,15 +36,15 @@ CREATE TABLE IF NOT EXISTS LIVRO (
 
 CREATE TABLE EMPRESTIMO (
     ID_EMPRESTIMO INT AUTO_INCREMENT,
-    DATA_EMPRESTIMO DATETIME DEFAULT CURRENT_TIMESTAMP,
+    DATA_SAIDA DATETIME DEFAULT CURRENT_TIMESTAMP,
     DATA_PREVISTA DATE NOT NULL,
-    DATA_DEVOLUCAO DATE,
+    DATA_RETORNO DATE,
     STATUS_EMPRESTIMO VARCHAR(20) DEFAULT 'ABERTO' CHECK (STATUS_EMPRESTIMO IN ('ABERTO', 'DEVOLVIDO', 'ATRASADO')),
-    ID_USUARIO INT NOT NULL,
+    ID_ALUNO INT NOT NULL,
     ID_LIVRO INT NOT NULL,
 
     CONSTRAINT PK_EMPRESTIMO PRIMARY KEY (ID_EMPRESTIMO),
-    CONSTRAINT FK_EMPRESTIMO_USUARIO FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO (ID_USUARIO),
+    CONSTRAINT FK_EMPRESTIMO_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES ALUNO (ID_ALUNO),
     CONSTRAINT FK_EMPRESTIMO_LIVRO FOREIGN KEY (ID_LIVRO) REFERENCES LIVRO (ID_LIVRO)
 );
 
@@ -71,85 +73,85 @@ CREATE TABLE SCORE (
     ID_SCORE INT AUTO_INCREMENT,
     PONTOS_ATUAIS INT DEFAULT 0 CHECK (PONTOS_ATUAIS >= 0),
     DATA_ATUALIZACAO DATETIME DEFAULT CURRENT_TIMESTAMP,
-    ID_USUARIO INT NOT NULL,
+    ID_ALUNO INT NOT NULL,
     ID_NIVEL INT NOT NULL,
 
     CONSTRAINT PK_SCORE PRIMARY KEY (ID_SCORE),
-    CONSTRAINT UQ_SCORE_USUARIO UNIQUE (ID_USUARIO),
-    CONSTRAINT FK_SCORE_USUARIO FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO (ID_USUARIO),
+    CONSTRAINT UQ_SCORE_ALUNO UNIQUE (ID_ALUNO),
+    CONSTRAINT FK_SCORE_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES ALUNO (ID_ALUNO),
     CONSTRAINT FK_SCORE_NIVEL FOREIGN KEY (ID_NIVEL) REFERENCES NIVEL_PLANETA (ID_NIVEL)
 );
 
 -- FASE 2 - DML
-INSERT INTO USUARIO (NOME, EMAIL, TELEFONE, ATIVO) VALUES
-('Raymond Reddington', 'redd@email.com', '19999990001', TRUE),
-('Elizabeth Keen', 'liz.keen@fbi.gov', '19999990016', FALSE),
-('Donald Ressler', 'donald.ressler@fbi.gov', '19999990017', TRUE),
-('Aram Mojtabai', 'aram.mojtabai@fbi.gov', '19999990019', TRUE),
-('Dembe Zuma', 'dembe.zuma@email.com', '19999990020', TRUE),
-('Michael Jackson', 'mike@email.com', '19999990002', TRUE),
-('Tobias Forge', 'ghostband@email.com', NULL, TRUE),
-('Terzo', 'terzo@email.com', '19999990004', TRUE),
-('Ana Renault', 'renault@email.com', NULL, TRUE),
-('Gerard Way', 'mychemicalromance@email.com', '19999990006', TRUE),
-('Vladmir Lenin', 'bolchevique@email.com', '19999990007', TRUE),
-('Karl Marx', 'comunista@email.com', NULL, FALSE),
-('Manuella Rossatt', 'manurossatt@email.com', '19999990009', TRUE),
-('Ana Laura', 'sociologa@email.com', '19999990010', TRUE),
-('Patrick Jane', 'patrick.jane@cbi.gov', '19999990011', TRUE),
-('Teresa Lisbon', 'teresa.lisbon@cbi.gov', '19999990012', TRUE),
-('Kimball Cho', 'kimball.cho@cbi.gov', '19999990013', TRUE),
-('Wayne Rigsby', 'wayne.rigsby@cbi.gov', '19999990014', TRUE),
-('Grace Van Pelt', 'grace.vanpelt@cbi.gov', '19999990015', TRUE),
-('Red John', 'redjohn@email.com', NULL, FALSE),
-('Jon Snow', 'jonsnow@patrulha.com', '19999990021', TRUE),
-('Daenerys Targaryen', 'khaleesi@dragons.com', '19999990022', FALSE),
-('Tyrion Lannister', 'tyrion@casterlyrock.com', '19999990023', TRUE),
-('Arya Stark', 'ninguem@braavos.com', '19999990024', TRUE),
-('Cersei Lannister', 'cersei@kingslanding.com', '19999990025', FALSE),
-('Sansa Stark', 'sansa@winterfell.com', '19999990026', TRUE),
-('Jaime Lannister', 'regicida@kingslanding.com', '19999990027', FALSE),
-('Eddard Stark', 'ned@winterfell.com', NULL, FALSE),
-('Eleven', 'onze@hawkins.com', '19999990028', TRUE),
-('Mike Wheeler', 'mike.wheeler@hawkins.com', '19999990029', TRUE),
-('Dustin Henderson', 'dustin@hawkins.com', '19999990030', TRUE),
-('Lucas Sinclair', 'lucas@hawkins.com', '19999990031', TRUE),
-('Will Byers', 'will@mundoinvertido.com', '19999990032', TRUE),
-('Max Mayfield', 'madmax@hawkins.com', '19999990033', TRUE),
-('Jim Hopper', 'xerife.hopper@hawkins.gov', '19999990034', TRUE),
-('Steve Harrington', 'steve.cabelo@scoops.com', '19999990035', TRUE),
-('Eddie Munson', 'eddie@hellfireclub.com', NULL, FALSE),
-('Viktor Hargreeves', 'viktor@umbrella.com', '19999990036', TRUE),
-('Luther Hargreeves', 'numero1@umbrella.com', '19999990037', TRUE),
-('Diego Hargreeves', 'numero2@umbrella.com', '19999990038', TRUE),
-('Allison Hargreeves', 'numero3@umbrella.com', '19999990039', TRUE),
-('Klaus Hargreeves', 'numero4@umbrella.com', '19999990040', TRUE),
-('Five Hargreeves', 'numero5@comissao.com', '19999990041', TRUE),
-('Ben Hargreeves', 'numero6@umbrella.com', NULL, FALSE),
-('Loki Laufeyson', 'deusdatrapaca@asgard.com', '19999990042', TRUE),
-('Tony Stark', 'ironman@starkindustries.com', '19999990043', FALSE),
-('Sasuke Uchiha', 'sasuke@konoha.com', '19999990044', TRUE),
-('Roronoa Zoro', 'zoro@chapeusdepalha.com', '19999990045', TRUE),
-('Shiryu de Dragão', 'shiryu@rozan.com', '19999990046', TRUE),
-('Hyoga de Cisne', 'hyoga@siberia.com', '19999990047', TRUE),
-('Shun de Andrômeda', 'shun@ilhaandro.com', '19999990048', TRUE),
-('Ikki de Fênix', 'ikki@ilhadarainha.com', '19999990049', TRUE),
-('Mu de Áries', 'mu@jamiel.com', '19999990050', TRUE),
-('Aldebaran de Touro', 'aldebaran@santuario.com', '19999990051', TRUE),
-('Saga de Gêmeos', 'saga@santuario.com', '19999990052', TRUE),
-('Kanon de Gêmeos', 'kanon@dragao-marinho.com', '19999990053', TRUE),
-('Máscara da Morte de Câncer', 'deathmask@santuario.com', '19999990054', FALSE),
-('Aiolia de Leão', 'aiolia@santuario.com', '19999990055', TRUE),
-('Shaka de Virgem', 'shaka@santuario.com', '19999990056', TRUE),
-('Dohko de Libra', 'mestreanciao@rozan.com', '19999990057', TRUE),
-('Milo de Escorpião', 'milo@santuario.com', '19999990058', TRUE),
-('Aiolos de Sagitário', 'aiolos@santuario.com', NULL, FALSE),
-('Shura de Capricórnio', 'shura@santuario.com', '19999990059', TRUE),
-('Camus de Aquário', 'camus@santuario.com', '19999990060', TRUE),
-('Afrodite de Peixes', 'afrodite@santuario.com', '19999990061', FALSE),
-('Saori Kido (Atena)', 'atena@santuario.com', '19999990062', TRUE),
-('Julian Solo (Poseidon)', 'poseidon@atlantida.com', '19999990063', TRUE),
-('Hades', 'hades@submundo.com', NULL, FALSE);
+INSERT INTO ALUNO (NOME, TURMA, EMAIL, TELEFONE, ATIVO) VALUES
+('Raymond Reddington', 'Turma The Blacklist', 'redd@email.com', '19999990001', TRUE),
+('Elizabeth Keen', 'Turma The Blacklist', 'liz.keen@fbi.gov', '19999990016', FALSE),
+('Donald Ressler', 'Turma The Blacklist', 'donald.ressler@fbi.gov', '19999990017', TRUE),
+('Aram Mojtabai', 'Turma The Blacklist', 'aram.mojtabai@fbi.gov', '19999990019', TRUE),
+('Dembe Zuma', 'Turma The Blacklist', 'dembe.zuma@email.com', '19999990020', TRUE),
+('Michael Jackson', 'Turma Música', 'mike@email.com', '19999990002', TRUE),
+('Tobias Forge', 'Turma Música', 'ghostband@email.com', NULL, TRUE),
+('Terzo', 'Turma Música', 'terzo@email.com', '19999990004', TRUE),
+('Ana Renault', 'Turma Developers', 'renault@email.com', NULL, TRUE),
+('Gerard Way', 'Turma Música', 'mychemicalromance@email.com', '19999990006', TRUE),
+('Vladmir Lenin', 'Turma História', 'bolchevique@email.com', '19999990007', TRUE),
+('Karl Marx', 'Turma História', 'comunista@email.com', NULL, FALSE),
+('Manuella Rossatt', 'Turma Developers', 'manurossatt@email.com', '19999990009', TRUE),
+('Ana Laura', 'Turma Professores', 'sociologa@email.com', '19999990010', TRUE),
+('Patrick Jane', 'Turma The Mentalist', 'patrick.jane@cbi.gov', '19999990011', TRUE),
+('Teresa Lisbon', 'Turma The Mentalist', 'teresa.lisbon@cbi.gov', '19999990012', TRUE),
+('Kimball Cho', 'Turma The Mentalist', 'kimball.cho@cbi.gov', '19999990013', TRUE),
+('Wayne Rigsby', 'Turma The Mentalist', 'wayne.rigsby@cbi.gov', '19999990014', TRUE),
+('Grace Van Pelt', 'Turma The Mentalist', 'grace.vanpelt@cbi.gov', '19999990015', TRUE),
+('Red John', 'Turma The Mentalist', 'redjohn@email.com', NULL, FALSE),
+('Jon Snow', 'Turma Game of Thrones', 'jonsnow@patrulha.com', '19999990021', TRUE),
+('Daenerys Targaryen', 'Turma Game of Thrones', 'khaleesi@dragons.com', '19999990022', FALSE),
+('Tyrion Lannister', 'Turma Game of Thrones', 'tyrion@casterlyrock.com', '19999990023', TRUE),
+('Arya Stark', 'Turma Game of Thrones', 'ninguem@braavos.com', '19999990024', TRUE),
+('Cersei Lannister', 'Turma Game of Thrones', 'cersei@kingslanding.com', '19999990025', FALSE),
+('Sansa Stark', 'Turma Game of Thrones', 'sansa@winterfell.com', '19999990026', TRUE),
+('Jaime Lannister', 'Turma Game of Thrones', 'regicida@kingslanding.com', '19999990027', FALSE),
+('Eddard Stark', 'Turma Game of Thrones', 'ned@winterfell.com', NULL, FALSE),
+('Eleven', 'Turma Stranger Things', 'onze@hawkins.com', '19999990028', TRUE),
+('Mike Wheeler', 'Turma Stranger Things', 'mike.wheeler@hawkins.com', '19999990029', TRUE),
+('Dustin Henderson', 'Turma Stranger Things', 'dustin@hawkins.com', '19999990030', TRUE),
+('Lucas Sinclair', 'Turma Stranger Things', 'lucas@hawkins.com', '19999990031', TRUE),
+('Will Byers', 'Turma Stranger Things', 'will@mundoinvertido.com', '19999990032', TRUE),
+('Max Mayfield', 'Turma Stranger Things', 'madmax@hawkins.com', '19999990033', TRUE),
+('Jim Hopper', 'Turma Stranger Things', 'xerife.hopper@hawkins.gov', '19999990034', TRUE),
+('Steve Harrington', 'Turma Stranger Things', 'steve.cabelo@scoops.com', '19999990035', TRUE),
+('Eddie Munson', 'Turma Stranger Things', 'eddie@hellfireclub.com', NULL, FALSE),
+('Viktor Hargreeves', 'Turma The Umbrella Academy', 'viktor@umbrella.com', '19999990036', TRUE),
+('Luther Hargreeves', 'Turma The Umbrella Academy', 'numero1@umbrella.com', '19999990037', TRUE),
+('Diego Hargreeves', 'Turma The Umbrella Academy', 'numero2@umbrella.com', '19999990038', TRUE),
+('Allison Hargreeves', 'Turma The Umbrella Academy', 'numero3@umbrella.com', '19999990039', TRUE),
+('Klaus Hargreeves', 'Turma The Umbrella Academy', 'numero4@umbrella.com', '19999990040', TRUE),
+('Five Hargreeves', 'Turma The Umbrella Academy', 'numero5@comissao.com', '19999990041', TRUE),
+('Ben Hargreeves', 'Turma The Umbrella Academy', 'numero6@umbrella.com', NULL, FALSE),
+('Loki Laufeyson', 'Turma Marvel', 'deusdatrapaca@asgard.com', '19999990042', TRUE),
+('Tony Stark', 'Turma Marvel', 'ironman@starkindustries.com', '19999990043', FALSE),
+('Sasuke Uchiha', 'Turma Naruto', 'sasuke@konoha.com', '19999990044', TRUE),
+('Roronoa Zoro', 'Turma One Piece', 'zoro@chapeusdepalha.com', '19999990045', TRUE),
+('Shiryu de Dragão', 'Turma Cavaleiros do Zodíaco', 'shiryu@rozan.com', '19999990046', TRUE),
+('Hyoga de Cisne', 'Turma Cavaleiros do Zodíaco', 'hyoga@siberia.com', '19999990047', TRUE),
+('Shun de Andrômeda', 'Turma Cavaleiros do Zodíaco', 'shun@ilhaandro.com', '19999990048', TRUE),
+('Ikki de Fênix', 'Turma Cavaleiros do Zodíaco', 'ikki@ilhadarainha.com', '19999990049', TRUE),
+('Mu de Áries', 'Turma Cavaleiros do Zodíaco', 'mu@jamiel.com', '19999990050', TRUE),
+('Aldebaran de Touro', 'Turma Cavaleiros do Zodíaco', 'aldebaran@santuario.com', '19999990051', TRUE),
+('Saga de Gêmeos', 'Turma Cavaleiros do Zodíaco', 'saga@santuario.com', '19999990052', TRUE),
+('Kanon de Gêmeos', 'Turma Cavaleiros do Zodíaco', 'kanon@dragao-marinho.com', '19999990053', TRUE),
+('Máscara da Morte de Câncer', 'Turma Cavaleiros do Zodíaco', 'deathmask@santuario.com', '19999990054', FALSE),
+('Aiolia de Leão', 'Turma Cavaleiros do Zodíaco', 'aiolia@santuario.com', '19999990055', TRUE),
+('Shaka de Virgem', 'Turma Cavaleiros do Zodíaco', 'shaka@santuario.com', '19999990056', TRUE),
+('Dohko de Libra', 'Turma Cavaleiros do Zodíaco', 'mestreanciao@rozan.com', '19999990057', TRUE),
+('Milo de Escorpião', 'Turma Cavaleiros do Zodíaco', 'milo@santuario.com', '19999990058', TRUE),
+('Aiolos de Sagitário', 'Turma Cavaleiros do Zodíaco', 'aiolos@santuario.com', NULL, FALSE),
+('Shura de Capricórnio', 'Turma Cavaleiros do Zodíaco', 'shura@santuario.com', '19999990059', TRUE),
+('Camus de Aquário', 'Turma Cavaleiros do Zodíaco', 'camus@santuario.com', '19999990060', TRUE),
+('Afrodite de Peixes', 'Turma Cavaleiros do Zodíaco', 'afrodite@santuario.com', '19999990061', FALSE),
+('Saori Kido (Atena)', 'Turma Cavaleiros do Zodíaco', 'atena@santuario.com', '19999990062', TRUE),
+('Julian Solo (Poseidon)', 'Turma Cavaleiros do Zodíaco', 'poseidon@atlantida.com', '19999990063', TRUE),
+('Hades', 'Turma Cavaleiros do Zodíaco', 'hades@submundo.com', NULL, TRUE);
 
 INSERT INTO LIVRO (TITULO, AUTOR, ISBN, ANO_PUBLICACAO, QUANTIDADE_DISPONIVEL) VALUES
 ('Memórias do Subsolo', 'Fiódor Dostoiévski', '9788573261523', 1864, 18),
@@ -243,7 +245,8 @@ INSERT INTO CATEGORIA (NOME, ID_LIVRO) VALUES
 ('LITERATURA INDÍGENA', 19), -- Coisas de Índio
 ('LITERATURA INDÍGENA', 20), -- A Terra dos Mil Povos
 ('LITERATURA INDÍGENA', 21), -- O Karaíba
--- IDs 22 a 33: Literatura Periférica & Afro-Brasileira
+-- IDs 22 a 33: Literatura Periférica e
+ -- Afro-Brasileira
 ('LITERATURA PERIFÉRICA', 22), -- Quarto de Despejo: Diário de uma Favelada
 ('LITERATURA PERIFÉRICA', 23), -- Casa de Alvenaria
 ('LITERATURA PERIFÉRICA', 24), -- Capão Pecado
@@ -302,7 +305,7 @@ INSERT INTO NIVEL_PLANETA (NOME_PLANETA, PONTOS_MINIMOS, PONTOS_MAXIMOS, BONUS_E
 ('Urano', 2300, 3499, 12),
 ('Netuno', 3500, NULL, 15);
 
-INSERT INTO SCORE (PONTOS_ATUAIS, ID_USUARIO, ID_NIVEL) VALUES
+INSERT INTO SCORE (PONTOS_ATUAIS, ID_ALUNO, ID_NIVEL) VALUES
 (3850, 1, 8),  -- Raymond Reddington -> Netuno (3500+)
 (0,    2, 1),  -- Elizabeth Keen -> Mercúrio (bloqueada)
 (620,  3, 4),  -- Donald Ressler -> Marte (500 a 899)
@@ -372,7 +375,7 @@ INSERT INTO SCORE (PONTOS_ATUAIS, ID_USUARIO, ID_NIVEL) VALUES
 (2900, 67, 7), -- Julian Solo (Poseidon) -> Urano (2300 a 3499)
 (4500, 68, 8); -- Hades -> Netuno (3500+ - Mestre Ancião!)
 
-INSERT INTO EMPRESTIMO (DATA_EMPRESTIMO, DATA_PREVISTA, DATA_DEVOLUCAO, STATUS_EMPRESTIMO, ID_USUARIO, ID_LIVRO) VALUES
+INSERT INTO EMPRESTIMO (DATA_SAIDA, DATA_PREVISTA, DATA_RETORNO, STATUS_EMPRESTIMO, ID_ALUNO, ID_LIVRO) VALUES
 ('2026-09-10 09:30:00', '2026-10-02', '2026-09-28', 'DEVOLVIDO', 1, 54),  -- Reddington leu O Conde de Monte Cristo
 ('2026-09-12 14:15:00', '2026-10-04', '2026-10-01', 'DEVOLVIDO', 15, 2),  -- Patrick Jane leu Crime e Castigo
 ('2026-09-15 11:00:00', '2026-10-07', '2026-10-05', 'DEVOLVIDO', 23, 7),  -- Tyrion leu Guerra e Paz
@@ -410,21 +413,21 @@ INSERT INTO EMPRESTIMO (DATA_EMPRESTIMO, DATA_PREVISTA, DATA_DEVOLUCAO, STATUS_E
 ('2026-10-15 16:45:00', '2026-10-22', NULL, 'ATRASADO', 46, 52), -- Tony Stark atrasado com Admirável Mundo Novo
 ('2026-11-01 13:40:00', '2026-11-12', NULL, 'ATRASADO', 55, 4); -- Saga de Gêmeos com O Idiota 
 
--- Inserindo 10 novos usuários (IDs 69 a 78)
-INSERT INTO USUARIO (NOME, EMAIL, TELEFONE, ATIVO) VALUES
-('Luke Skywalker', 'luke@aliancarebelde.com', '19999990064', TRUE),
-('Leia Organa', 'leia@alderaan.gov', '19999990065', TRUE),
-('Han Solo', 'han.solo@millennium.com', '19999990066', TRUE),
-('Darth Vader', 'vader@imperio.gov', '19999990067', TRUE),
-('Imperador Palpatine', 'sidious@senado.gov', '19999990068', TRUE),
-('Obi-Wan Kenobi', 'ben.kenobi@tatooine.com', '19999990069', TRUE),
-('Mestre Yoda', 'yoda@dagobah.org', NULL, TRUE),
-('R2-D2', 'r2d2@astromech.org', NULL, TRUE),
-('C-3PO', 'c3po@protocolo.org', '19999990070', TRUE),
-('BB-8', 'bb8@resistencia.org', NULL, TRUE);
+-- Inserindo 10 novos alunos (IDs 69 a 78)
+INSERT INTO ALUNO (NOME, TURMA, EMAIL, TELEFONE, ATIVO) VALUES
+('Luke Skywalker', 'Turma Star Wars', 'luke@aliancarebelde.com', '19999990064', TRUE),
+('Leia Organa', 'Turma Star Wars', 'leia@alderaan.gov', '19999990065', TRUE),
+('Han Solo', 'Turma Star Wars', 'han.solo@millennium.com', '19999990066', TRUE),
+('Darth Vader', 'Turma Star Wars', 'vader@imperio.gov', '19999990067', TRUE),
+('Imperador Palpatine', 'Turma Star Wars', 'sidious@senado.gov', '19999990068', TRUE),
+('Obi-Wan Kenobi', 'Turma Star Wars', 'ben.kenobi@tatooine.com', '19999990069', TRUE),
+('Mestre Yoda', 'Turma Star Wars', 'yoda@dagobah.org', NULL, TRUE),
+('R2-D2', 'Turma Star Wars', 'r2d2@astromech.org', NULL, TRUE),
+('C-3PO', 'Turma Star Wars', 'c3po@protocolo.org', '19999990070', TRUE),
+('BB-8', 'Turma Star Wars', 'bb8@resistencia.org', NULL, TRUE);
 
--- Criando o SCORE de cada um (Vader e Palpatine no topo de Netuno!)
-INSERT INTO SCORE (PONTOS_ATUAIS, ID_USUARIO, ID_NIVEL) VALUES
+-- Criando o SCORE de cada um.
+INSERT INTO SCORE (PONTOS_ATUAIS, ID_ALUNO, ID_NIVEL) VALUES
 (450,  69, 3), -- Luke Skywalker -> Terra (250 a 499)
 (820,  70, 4), -- Leia Organa -> Marte (500 a 899)
 (90,   71, 1), -- Han Solo -> Mercúrio (0 a 99)
@@ -436,102 +439,151 @@ INSERT INTO SCORE (PONTOS_ATUAIS, ID_USUARIO, ID_NIVEL) VALUES
 (3650, 77, 8), -- C-3PO -> Netuno (3500+ - Fluente em 6 milhões de formas de leitura!)
 (310,  78, 3); -- BB-8 -> Terra (250 a 499)
 
-INSERT INTO EMPRESTIMO (DATA_EMPRESTIMO, DATA_PREVISTA, DATA_DEVOLUCAO, STATUS_EMPRESTIMO, ID_USUARIO, ID_LIVRO) VALUES
+INSERT INTO EMPRESTIMO (DATA_SAIDA, DATA_PREVISTA, DATA_RETORNO, STATUS_EMPRESTIMO, ID_ALUNO, ID_LIVRO) VALUES
 ('2026-11-20 09:00:00', '2026-12-12', NULL, 'ABERTO', 72, 5),  -- Darth Vader lendo Os Demônios (Dostoiévski)
 ('2026-11-21 14:30:00', '2026-12-13', NULL, 'ABERTO', 73, 50), -- Palpatine lendo 1984 (George Orwell)
 ('2026-11-22 10:15:00', '2026-12-09', NULL, 'ABERTO', 76, 53), -- R2-D2 lendo Fahrenheit 451
 ('2026-11-23 11:45:00', '2026-12-15', NULL, 'ABERTO', 77, 17), -- C-3PO lendo A Queda do Céu
 ('2026-11-24 08:20:00', '2026-12-05', NULL, 'ABERTO', 78, 61); -- BB-8 lendo Percy Jackson e o Ladrão de Raios
 
-INSERT INTO USUARIO (NOME, EMAIL, TELEFONE, ATIVO) VALUES
-('Vinicius', 'vinicius@email.com', '19999990071', TRUE),
-('Vitória', 'vitoria@email.com', '19999990072', TRUE),
-('Virgínia', 'virginia@email.com', '19999990073', TRUE),
-('Letícia', 'leticia@email.com', '19999990074', TRUE);
+INSERT INTO ALUNO (NOME, TURMA, EMAIL, TELEFONE, ATIVO) VALUES
+('Vinicius', 'Turma Developers', 'vinicius@email.com', '19999990071', TRUE),
+('Vitória', 'Turma Developers', 'vitoria@email.com', '19999990072', TRUE),
+('Virgínia', 'Turma Developers', 'virginia@email.com', '19999990073', TRUE),
+('Letícia', 'Turma Professores', 'leticia@email.com', '19999990074', TRUE);
 
-INSERT INTO SCORE (PONTOS_ATUAIS, ID_USUARIO, ID_NIVEL) VALUES
+INSERT INTO SCORE (PONTOS_ATUAIS, ID_ALUNO, ID_NIVEL) VALUES
 (1250, 79, 5), -- Vinicius -> Júpiter (900 a 1499)
 (2650, 80, 7), -- Vitória -> Urano (2300 a 3499)
 (780,  81, 4), -- Virgínia -> Marte (500 a 899)
 (3750, 82, 8); -- Letícia -> Netuno (3500+)
  
-INSERT INTO EMPRESTIMO (DATA_EMPRESTIMO, DATA_PREVISTA, DATA_DEVOLUCAO, STATUS_EMPRESTIMO, ID_USUARIO, ID_LIVRO) VALUES
+INSERT INTO EMPRESTIMO (DATA_SAIDA, DATA_PREVISTA, DATA_RETORNO, STATUS_EMPRESTIMO, ID_ALUNO, ID_LIVRO) VALUES
 ('2026-11-24 11:00:00', '2026-12-09', NULL, 'ABERTO', 79, 1),  -- Vinicius pegou Memórias do Subsolo
 ('2026-11-24 11:10:00', '2026-12-13', NULL, 'ABERTO', 80, 29), -- Vitória pegou Torto Arado
 ('2026-11-24 11:20:00', '2026-12-07', NULL, 'ABERTO', 81, 42), -- Virgínia pegou A Hora da Estrela
 ('2026-11-24 11:30:00', '2026-12-16', NULL, 'ABERTO', 82, 14); -- Letícia pegou Ideias para Adiar o Fim do Mundo
 
 -- DQL
+--  SOBRE OS ALUNOS
 
-SELECT * FROM usuario
+-- INFORMAÇÕES DOS ALUNOS
+SELECT * FROM ALUNO
 
-SELECT TITULO, AUTOR, QUANTIDADE_DISPONIVEL FROM LIVRO;
+-- SOBRE OS LIVROS
 
-SELECT TITULO, AUTOR FROM LIVRO
+-- QUANTIDADE DE CADA LIVRO EM ORDEM DECRESCENTE.
+SELECT TITULO, AUTOR, QUANTIDADE_DISPONIVEL FROM LIVRO
 WHERE QUANTIDADE_DISPONIVEL > 2
 ORDER BY QUANTIDADE_DISPONIVEL DESC;
 
+-- BUSCA COM PALAVRA-CHAVE.
 SELECT TITULO, AUTOR FROM LIVRO
 WHERE TITULO LIKE '%IDIOTA%'
 
+-- LIVROS ORGANIZADOS NA ORDEM CRESCENTE ENTRE OS ANOS DE 1840 E 2000.
 SELECT TITULO, AUTOR, ANO_PUBLICACAO FROM LIVRO
-WHERE ANO_PUBLICACAO BETWEEN 1990 AND 2025;
+WHERE ANO_PUBLICACAO BETWEEN 1840 AND 2000
+ORDER BY ANO_PUBLICACAO ASC
 
+-- QUANTIDADE DE LIVROS DO ACERVO RELICÁRIO DOS CORVOS, A SOMA DA QUANTIDADE DE CADA LIVRO, A MEDIA DA QUANTIDADE DE CADA LIVRO, 
+-- A QUANTIDADE MÁXIMA QUE UMA OBRA POSSUI, E A QUAMTIDADE MÍNIMA QUE UMA OBRA POSSUI.
 SELECT COUNT (*) AS QUANTIDADE, SUM(QUANTIDADE_DISPONIVEL) AS SOMA, AVG(QUANTIDADE_DISPONIVEL) AS MEDIA, MAX(QUANTIDADE_DISPONIVEL) AS MAXIMO, MIN(QUANTIDADE_DISPONIVEL) AS MINIMO FROM LIVRO;
 
--- RANKING
+
+-- SOBRE A COMPETIÇÃO
+
+-- RANKING INDIVIDUAL
 SELECT 
-    U.ID_USUARIO,
-    U.NOME AS LEITOR,
-    S.PONTOS_ATUAIS,
-    N.NOME_PLANETA AS PLANETA,
-    N.BONUS_EMPRESTIMO AS DIAS_BONUS,
-    U.ATIVO
-FROM USUARIO U
-INNER JOIN SCORE S ON U.ID_USUARIO = S.ID_USUARIO
+U.ID_ALUNO,
+U.NOME AS LEITOR,
+S.PONTOS_ATUAIS,
+N.NOME_PLANETA AS PLANETA,
+N.BONUS_EMPRESTIMO AS DIAS_BONUS,
+U.ATIVO
+FROM ALUNO U
+INNER JOIN SCORE S ON U.ID_ALUNO = S.ID_ALUNO
 INNER JOIN NIVEL_PLANETA N ON S.ID_NIVEL = N.ID_NIVEL
 ORDER BY S.PONTOS_ATUAIS DESC;
 
 -- APENAS ATRASADOS
 SELECT 
-    U.NOME AS LEITOR,
-    U.TELEFONE,
-    L.TITULO AS LIVRO_ATRASADO,
-    E.DATA_PREVISTA,
-    N.NOME_PLANETA AS PLANETA_ATUAL
+U.NOME AS LEITOR,
+U.TELEFONE,
+L.TITULO AS LIVRO_ATRASADO,
+E.DATA_PREVISTA,
+N.NOME_PLANETA AS PLANETA_ATUAL
 FROM EMPRESTIMO E
-INNER JOIN USUARIO U ON E.ID_USUARIO = U.ID_USUARIO
+INNER JOIN ALUNO U ON E.ID_ALUNO = U.ID_ALUNO
 INNER JOIN LIVRO L ON E.ID_LIVRO = L.ID_LIVRO
-INNER JOIN SCORE S ON U.ID_USUARIO = S.ID_USUARIO
+INNER JOIN SCORE S ON U.ID_ALUNO = S.ID_ALUNO
 INNER JOIN NIVEL_PLANETA N ON S.ID_NIVEL = N.ID_NIVEL
 WHERE E.STATUS_EMPRESTIMO = 'ATRASADO';
 
 -- APENAS EM ABERTO
 SELECT 
-    U.NOME AS LEITOR,
-    U.TELEFONE,
-    L.TITULO AS LIVRO_ATRASADO,
-    E.DATA_PREVISTA,
-    N.NOME_PLANETA AS PLANETA_ATUAL
+U.NOME AS LEITOR,
+U.TELEFONE,
+L.TITULO AS LIVRO_ATRASADO,
+E.DATA_PREVISTA,
+N.NOME_PLANETA AS PLANETA_ATUAL
 FROM EMPRESTIMO E
-INNER JOIN USUARIO U ON E.ID_USUARIO = U.ID_USUARIO
+INNER JOIN ALUNO U ON E.ID_ALUNO = U.ID_ALUNO
 INNER JOIN LIVRO L ON E.ID_LIVRO = L.ID_LIVRO
-INNER JOIN SCORE S ON U.ID_USUARIO = S.ID_USUARIO
+INNER JOIN SCORE S ON U.ID_ALUNO = S.ID_ALUNO
 INNER JOIN NIVEL_PLANETA N ON S.ID_NIVEL = N.ID_NIVEL
 WHERE E.STATUS_EMPRESTIMO = 'ABERTO';
 
 -- APENAS DEVOLVIDO
 SELECT 
-    U.NOME AS LEITOR,
-    U.TELEFONE,
-    L.TITULO AS LIVRO_ATRASADO,
-    E.DATA_PREVISTA,
-    N.NOME_PLANETA AS PLANETA_ATUAL
+U.NOME AS LEITOR,
+U.TELEFONE,
+L.TITULO AS LIVRO_ATRASADO,
+E.DATA_PREVISTA,
+N.NOME_PLANETA AS PLANETA_ATUAL
 FROM EMPRESTIMO E
-INNER JOIN USUARIO U ON E.ID_USUARIO = U.ID_USUARIO
+INNER JOIN ALUNO U ON E.ID_ALUNO = U.ID_ALUNO
 INNER JOIN LIVRO L ON E.ID_LIVRO = L.ID_LIVRO
-INNER JOIN SCORE S ON U.ID_USUARIO = S.ID_USUARIO
+INNER JOIN SCORE S ON U.ID_ALUNO = S.ID_ALUNO
 INNER JOIN NIVEL_PLANETA N ON S.ID_NIVEL = N.ID_NIVEL
 WHERE E.STATUS_EMPRESTIMO = 'DEVOLVIDO';
 
+-- SCORE DE CADA TURMA.
+SELECT 
+A.TURMA,
+SUM(S.PONTOS_ATUAIS) AS SCORE_TOTAL
+FROM ALUNO A
+INNER JOIN SCORE S ON A.ID_ALUNO = S.ID_ALUNO
+GROUP BY A.TURMA
+ORDER BY SCORE_TOTAL DESC;
 
+-- SCORE TOTAL DE CADA TURMA E A MÉDIA RESULTANDO NA CLASSIFICAÇÃO PLANETÁRIA DE CADA TURMA.
+SELECT 
+A.TURMA,
+SUM(S.PONTOS_ATUAIS) AS SCORE_TOTAL,
+AVG(S.PONTOS_ATUAIS) AS MEDIA_PONTOS,
+NP.NOME_PLANETA AS PLANETA_DA_TURMA
+FROM ALUNO A
+INNER JOIN SCORE S ON A.ID_ALUNO = S.ID_ALUNO
+CROSS JOIN NIVEL_PLANETA NP
+GROUP BY A.TURMA, NP.NOME_PLANETA, NP.PONTOS_MINIMOS, NP.PONTOS_MAXIMOS
+HAVING AVG(S.PONTOS_ATUAIS) >= NP.PONTOS_MINIMOS 
+AND (AVG(S.PONTOS_ATUAIS) < NP.PONTOS_MAXIMOS + 1 OR NP.PONTOS_MAXIMOS IS NULL)
+ORDER BY SCORE_TOTAL DESC;
+
+
+
+
+-- TCL
+START TRANSACTION;
+-- REGISTRAR EMPRÉSTIMO
+INSERT INTO EMPRESTIMO (id_aluno, id_livro, DATA_SAIDA) 
+VALUES (10, 55, '2026-11-25');
+-- DIMINUINDO 1 NO ESTOQUE DO LIVRO
+UPDATE LIVROS
+SET QUANTIDADE_DISPONIVEL = QUANTIDADE_DISPONIVEL - 1 
+WHERE ID_LIVRO = 55;
+-- SALVAR
+COMMIT;
+-- VOLTAR
+ROLLBACK;
