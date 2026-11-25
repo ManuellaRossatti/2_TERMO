@@ -1,0 +1,10 @@
+.link-ant {
+    text-decoration: none;
+    list-style: none;
+    border: 1px solid rgb(20, 20, 139);
+    border-radius: 40px;
+    background-color: rgb(56, 102, 170);
+    color: azure;
+    padding: 8px;
+    margin: 2px;
+}
